@@ -5,5 +5,21 @@
 /* element selectors */
 
 /* class selectors  */
+.is-4by3,
+.card-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
+.content,
+.media-content {
+  text-align: center;
+}
+
+/* ID Selectors */
+#viewPets,
+#goHomepage {
+  float: right;
+}
 /* media  */
