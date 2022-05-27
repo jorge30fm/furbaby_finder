@@ -5,8 +5,9 @@
 /* element selectors */
 
 /* class selectors  */
-.is-4by3,
-.card-content {
+.card-image,
+.card,
+.image {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
