@@ -46,10 +46,3 @@
 }
 
 /* media  */
-
-@media (min-width: 980px) {
-.card {
-  width: 500px;
-  margin: auto;
-}
-}
