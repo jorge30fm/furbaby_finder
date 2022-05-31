@@ -1,0 +1,41 @@
+
+/* root selector */
+
+/* universal selector */
+
+/* element selectors */
+
+/* class selectors  */
+.card {
+  margin: 30px 35%;
+  box-shadow: 2px 2px 6px;
+}
+
+.card-image,
+.card,
+.image {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px 15px 20px 15px;
+  border-radius: 5px;
+}
+
+.content,
+.media-content {
+  text-align: center;
+  margin: 5px;
+}
+
+.title {
+  font-size: x-large;
+}
+
+/* ID Selectors */
+#viewPets,
+#goHomepage {
+  float: right;
+}
+
+/* media  */
+
