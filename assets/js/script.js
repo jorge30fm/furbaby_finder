@@ -7,7 +7,10 @@ function goToMyPets() {
 function goToIndex() {
   goHomepage.addEventListener("click", (window.location.href = "index.html"));
 }
-
+var requestURL ='https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?type=dog&page=2';
+var apiKey = 'pcOOphn8LZripwmmfhEXx8RXrETc8Tl98i0ur0E2qQoCgTY2TV';
+var secret ='RIRHL8ucrwQrfxzYOtVebcHMnLTCET7ZnBpwuTAn';
+var token;
 var petPhoto = $("#petPhoto");
 var petName = $("#petName");
 var petAge = $("#petAge");
@@ -20,15 +23,39 @@ var petDescription = $("#description");
 var petURL = $("#petURL")
 var count = 0;
 var petData;
+var savedPets = [];
 
-var requestURL ='https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?type=dog&page=2';
 
-var apiKey = 'pcOOphn8LZripwmmfhEXx8RXrETc8Tl98i0ur0E2qQoCgTY2TV';
 
-var secret ='RIRHL8ucrwQrfxzYOtVebcHMnLTCET7ZnBpwuTAn';
+//when user swipes left, next pet is displayed
+swipeLeft.click(function() {
+    count++;
+    if (count < 100){
+    displayInfo();
+    console.log(count)
+    }
+    else {
+      count = 0;
+    fetchPetData()
+    }
+});
 
-var token;
+//when user swipes right,pet info is saved to local storage and next pet is displayed
+swipeRight.click(function(){
+  savedPets.push(petData.animals[count]);
+  localStorage.setItem("savedPets", JSON.stringify(savedPets));
+  count ++
+  if (count < 100) {
+    displayInfo();
+    console.log(count)
+    }
+    else {
+      count = 0;
+    fetchPetData()
+    }
+})
 
+var  fetchPetData = function(){
 fetch('https://api.petfinder.com/v2/oauth2/token', {
   method: 'POST',
   headers: {
@@ -48,7 +75,7 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
     const token = data.access_token;
     const authorization = 'Bearer ' + token;
 
-    fetch('https://api.petfinder.com/v2/animals?type=dog', {
+    fetch('https://api.petfinder.com/v2/animals?type=dog&limit=100', {
       headers: { Authorization: authorization, 'Content-Type': 'application/json' },
     })
       .then(function (response) {
@@ -56,14 +83,13 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
       })
       .then(function (doggieData) {
         petData = doggieData;
-        console.log('>>> doggieData >>>', doggieData);
         console.log(petData)
         displayInfo()
-git
       })
   });
+}
 
-  var displayInfo = function() {
+var displayInfo = function() {
     //add pet Image
     var imageSrc = petData.animals[count].primary_photo_cropped.medium;
     var imageEl = $('<img src="'+ imageSrc +'">')
@@ -103,10 +129,9 @@ git
     petURL.attr("href", url)
   }
 
+fetchPetData()
 
 
 
-/* create fetch call to retrieve data about animals
-when the user swipes, a new animal is presented
-if user swiped right, animal info is saved to local storage and displayed in saved pets html page
-*/
+
+
