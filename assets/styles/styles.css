@@ -6,11 +6,13 @@
 /* element selectors */
 
 /* class selectors  */
+
 .card {
   margin: 30px 35%;
   box-shadow: 2px 2px 6px;
+  color: #283959;
+  background-color: #f8fbff;
 }
-
 .card-image,
 .card,
 .image {
@@ -20,7 +22,6 @@
   padding: 5px 15px 20px 15px;
   border-radius: 5px;
 }
-
 .content,
 .media-content {
   text-align: center;
@@ -29,8 +30,15 @@
 
 .title {
   font-size: x-large;
+  color: #283959;
 }
 
+#description {
+  margin: 0 0 20px 0;
+}
+.petlink {
+  margin-bottom: 20px;
+}
 /* ID Selectors */
 #viewPets,
 #goHomepage {
@@ -39,3 +47,9 @@
 
 /* media  */
 
+@media (min-width: 980px) {
+.card {
+  width: 500px;
+  margin: auto;
+}
+}
