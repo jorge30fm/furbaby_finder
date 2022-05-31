@@ -7,6 +7,7 @@ function goToMyPets() {
 function goToIndex() {
   goHomepage.addEventListener("click", (window.location.href = "index.html"));
 }
+
 var requestURL ='https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?type=dog&page=2';
 var apiKey = 'pcOOphn8LZripwmmfhEXx8RXrETc8Tl98i0ur0E2qQoCgTY2TV';
 var secret ='RIRHL8ucrwQrfxzYOtVebcHMnLTCET7ZnBpwuTAn';
@@ -32,7 +33,6 @@ swipeLeft.click(function() {
     count++;
     if (count < 100){
     displayInfo();
-    console.log(count)
     }
     else {
       count = 0;
@@ -47,7 +47,6 @@ swipeRight.click(function(){
   count ++
   if (count < 100) {
     displayInfo();
-    console.log(count)
     }
     else {
       count = 0;
@@ -83,7 +82,6 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
       })
       .then(function (doggieData) {
         petData = doggieData;
-        console.log(petData)
         displayInfo()
       })
   });
@@ -128,8 +126,27 @@ var displayInfo = function() {
     var url = petData.animals[count].url;
     petURL.attr("href", url)
   }
+var displaySavedPets = function() {
 
-fetchPetData()
+
+}
+
+
+
+var deployPage = function(){
+  var body =$('body').attr('id')
+  console.log(body)
+  if (body === 'index') {
+      fetchPetData()
+  }
+  else if (body ==='myPets') {
+    var savedPetsList =localStorage.getItem('savedPets');
+
+  }
+}
+
+
+deployPage()
 
 
 
