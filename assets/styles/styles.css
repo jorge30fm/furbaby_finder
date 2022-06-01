@@ -41,7 +41,8 @@
 /* ID Selectors */
 #viewPets,
 #goHomepage {
-  float: right;
+  display: flex;
+  justify-content: end;
 }
 
 /* media  */
