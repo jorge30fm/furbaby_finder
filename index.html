@@ -48,33 +48,35 @@
       </nav>
     </header>
 
-    <div class="card">
-      <div class="card-image">
-        <figure class="photo" id="petPhoto">
-          <img
-            src="https://bulma.io/images/placeholders/1280x960.png"
-            alt="Placeholder image"
-          />
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left"></div>
-          <div class="media-content">
-            <p class="title is-1" id="petName">NAME</p>
-            <p id="petAge">AGE</p>
-            <p id="petGender">GENDER</p>
-            <p id="petBreed">BREED</p>
-            <p id="petCity">CITY</p>
+    <div class="columns is-mobile is-centered">
+      <div class="card column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+        <div class="card-image mt-5">
+          <figure class="photo" id="petPhoto">
+            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+
+            </div>
+            <div class="media-content">
+              <p class="title is-1" id="petName">NAME</p>
+              <p id='petAge'>AGE</p>
+              <p id="petGender">GENDER</p>
+              <p id="petBreed">BREED</p>
+              <p id="petCity">CITY</p>
+            </div>
           </div>
+          <div class="mgb-large">
+            <p id="description">
+              DESCRIPTION
+            </p>
+            <p class="petlink">Read more <a id="petURL">here</a></p>
         </div>
-        <div>
-          <p id="description">DESCRIPTION</p>
-          <p>Read more</p>
-          <a id="petURL">here</a>
-        </div>
-        <button class="button is-link is-light" id="swipeLeft">Reject</button>
-        <button class="button is-primary" id="swipeRight">Love</button>
+        <div class="container">
+          <button class="button is-link is-light" id="swipeLeft">Reject</button>
+          <button class="button is-primary" id="swipeRight">Love</button></div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
