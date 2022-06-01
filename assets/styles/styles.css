@@ -46,3 +46,20 @@
 }
 
 /* media  */
+
+/*view my pets styling*/
+.viewSavedCard {
+  margin: 0;
+  margin-right: 0;
+  width: 100%;
+}
+.cardItem {
+  width: 100%;
+  margin: 0;
+  border: solid 1px #283959;
+  display: flex;
+  padding-right: 20%;
+}
+.text {
+  margin-left: ;
+}
