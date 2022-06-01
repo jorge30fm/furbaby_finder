@@ -42,8 +42,14 @@ swipeLeft.click(function() {
 
 //when user swipes right,pet info is saved to local storage and next pet is displayed
 swipeRight.click(function(){
-  savedPets.push(petData.animals[count]);
+  if (localStorage.getItem('savedPets')==null) {
+  savedPes.push(petData.animals[count]);
   localStorage.setItem("savedPets", JSON.stringify(savedPets));
+  } else {
+    savedPets = JSON.parse(localStorage.getItem("savedPets"));
+    savedPets.push(petData.animals[count]);
+    localStorage.setItem('savedPets', JSON.stringify(savedPets));
+  }
   count ++
   if (count < 100) {
     displayInfo();
@@ -81,6 +87,7 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
         return response.json();
       })
       .then(function (doggieData) {
+        console.log(doggieData)
         petData = doggieData;
         displayInfo()
       })
@@ -126,12 +133,6 @@ var displayInfo = function() {
     var url = petData.animals[count].url;
     petURL.attr("href", url)
   }
-var displaySavedPets = function() {
-
-
-}
-
-
 
 var deployPage = function(){
   var body =$('body').attr('id')
@@ -140,8 +141,80 @@ var deployPage = function(){
       fetchPetData()
   }
   else if (body ==='myPets') {
-    var savedPetsList =localStorage.getItem('savedPets');
+    var savedList =JSON.parse(localStorage.getItem('savedPets'));
+    console.log(savedList)
+    for (count = 0; count < savedList.length; count++) {
+      var card = ` <div class="card cardItem" id='card` + count + `'>
+    <div class="column is-3 text">
+      <figure class="" id="petPhoto` + count + `">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
+      <div class="column is-9">
+        <p class="" id="petName` + count + `">NAME</p>
+        <p id='petAge`+ count + `'>AGE</p>
+        <p id="petGender`+ count +`">GENDER</p>
+        <p id="petBreed`+ count +`">BREED</p>
+        <p id="petCity`+ count +`">CITY</p>
+        <p id="description`+ count +`">
+        DESCRIPTION
+        </p>
+        <p class="petlink">Read more <a id="petURL`+ count +`">here</a></p>
+      </div>
+      </div>`;
+    $("#displaySaved").append(card);
 
+    var displaySavedPets = function() {
+      var petPhoto = $("#petPhoto" + count);
+      var petName = $("#petName" + count);
+      var petAge = $("#petAge"+ count);
+      var petGender = $("#petGender" + count);
+      var petBreed = $("#petBreed"+ count);
+      var petCity = $("#petCity"+ count)
+      var swipeLeft =$("#swipeLeft"+ count);
+      var swipeRight = $("#swipeRight"+ count);
+      var petDescription = $("#description"+ count);
+      var petURL = $("#petURL"+ count)
+
+      var imageSrc = savedList[count].primary_photo_cropped.small;
+      var imageEl = $('<img src="'+ imageSrc +'">')
+      petPhoto.html(imageEl)
+
+      //add Pet Name
+      var name = savedList[count].name;
+      petName.text(name)
+
+      //add age
+      var age = savedList[count].age
+      petAge.text(age)
+      //add gender
+      var gender = savedList[count].gender
+      petGender.text(gender)
+
+      //add Breed
+      var checkMixedBreed = savedList[count].breeds.mixed;
+      if(checkMixedBreed) {
+        var breed = savedList[count].breeds.primary;
+        petBreed.text(breed)
+      } else {
+        var primaryBreed = savedList[count].breeds.primary;
+        var secondaryBreed = savedList[count].breeds.secondary;
+        petBreed.text("Mixed: " + primaryBreed + 'and ' + secondaryBreed)
+      }
+      // add city
+      var city = savedList[count].contact.address.city;
+      var state = savedList[count].contact.address.state;
+      petCity.text(city + ', ' + state);
+
+      //add description
+      var description = savedList[count].description;
+      petDescription.text(description)
+      // add url link
+      var url = savedList[count].url;
+      petURL.attr("href", url)
+    }
+  displaySavedPets()
+    }
   }
 }
 
