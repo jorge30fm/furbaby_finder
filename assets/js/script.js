@@ -1,6 +1,6 @@
 //  navigation button for going to mypets.html
 function goToMyPets() {
-  viewPets.addEventListener("click", (window.location.href = "myPets.html"));
+  viewPets.addEventListener("click", (window.location.href = "mypets.html"));
 }
 
 // navigation button for going back to homepage
@@ -87,6 +87,7 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
         return response.json();
       })
       .then(function (doggieData) {
+        console.log(doggieData)
         petData = doggieData;
         displayInfo()
       })
@@ -107,12 +108,9 @@ var displayInfo = function() {
     var age = petData.animals[count].age
     petAge.text(age)
     //add gender
-    var gender = petData.animals[count].gender;
-    if (gender === "Female"){
-      petGender.html('<i class="fa-solid fa-venus">')
-    } else if (gender === "Male") {
-      petGender.html('<i class="fa-solid fa-mars">')
-    }
+    var gender = petData.animals[count].gender
+    petGender.text(gender)
+
     //add Breed
     var checkMixedBreed = petData.animals[count].breeds.mixed;
     if(checkMixedBreed) {
@@ -138,22 +136,24 @@ var displayInfo = function() {
 
 var deployPage = function(){
   var body =$('body').attr('id')
+  console.log(body)
   if (body === 'index') {
       fetchPetData()
   }
   else if (body ==='myPets') {
-    var savedList = JSON.parse(localStorage.getItem('savedPets'));
+    var savedList =JSON.parse(localStorage.getItem('savedPets'));
+    console.log(savedList)
     for (count = 0; count < savedList.length; count++) {
-      var card = ` <div class="card cardItem" id='card` + count + `'>
-    <div class="column myPetsPhoto is-4 text">
+      var card = ` <div class="card petcard cardItem" id='card` + count + `'>
+    <div class="column is-3 text">
       <figure class="" id="petPhoto` + count + `">
         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
       </figure>
     </div>
-      <div class="column is-8">
-        <p class="myPetsName" id="petName` + count + `">NAME</p>
+      <div class="column is-9">
+        <p class="" id="petName` + count + `">NAME</p>
         <p id='petAge`+ count + `'>AGE</p>
-        <div id="petGender`+ count +`"></div>
+        <p id="petGender`+ count +`">GENDER</p>
         <p id="petBreed`+ count +`">BREED</p>
         <p id="petCity`+ count +`">CITY</p>
         <p id="description`+ count +`">
@@ -189,11 +189,8 @@ var deployPage = function(){
       petAge.text(age)
       //add gender
       var gender = savedList[count].gender
-      if (gender === "Female") {
-        petGender.html('<i class="fa-solid fa-venus">')
-        } else if (gender === "Male") {
-        petGender.html('<i class="fa-solid fa-mars"></i>')
-        }
+      petGender.text(gender)
+
       //add Breed
       var checkMixedBreed = savedList[count].breeds.mixed;
       if(checkMixedBreed) {
@@ -216,13 +213,13 @@ var deployPage = function(){
       var url = savedList[count].url;
       petURL.attr("href", url)
     }
-    displaySavedPets()
+  displaySavedPets()
     }
   }
 }
 
-deployPage()
 
+deployPage()
 
 
 

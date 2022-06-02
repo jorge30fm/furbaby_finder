@@ -5,29 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <script src="https://kit.fontawesome.com/eb1ba12425.js" crossorigin="anonymous"></script>
-    <link href='https://fonts.googleapis.com/css?family=Dekko' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/styles/styles.css" />
-    <title>Tinder Adopt</title>
+    <title>Furbaby Finder</title>
   </head>
   <body id="index">
     <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <h1>Tinder Adopt</h1>
-        </div>
-        <div class="buttons">
-          <a class="button is-primary" onclick="goToMyPets()" id="viewPets">
-            <strong>View Saved Pets</strong>
+          <h1>Furbaby Finder</h1>
+
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </a>
         </div>
 
+        <div id="navbarBasicExample" class="navbar-menu">
+
+
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary" onclick="goToMyPets()" id="viewPets">
+                  <strong>View Saved Pets</strong>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </nav>
     </header>
 
     <div class="columns is-mobile is-centered" >
-      <div class="card indexCard column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen">
+      <div class="card column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen">
         <div class="card-image mt-5">
           <figure class="photo" id="petPhoto">
             <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -38,7 +49,7 @@
             <div class="media-content">
               <p class="title is-1" id="petName">NAME</p>
               <p id='petAge'>AGE</p>
-              <div id="petGender"></div>
+              <p id="petGender">GENDER</p>
               <p id="petBreed">BREED</p>
               <p id="petCity">CITY</p>
             </div>
