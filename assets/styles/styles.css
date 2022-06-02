@@ -134,6 +134,7 @@ img {
 .media-content {
   text-align: center;
 }
+
 .title {
   font-size: x-large;
   color: #283959;
@@ -166,10 +167,18 @@ img {
 }
 .myPetsName {
   font-size: 2.5em;
+  display: inline;
+}
+.fa-paw {
+  display: inline;
 }
 .btn-container {
   display: flex;
   justify-content: center;
+}
+#swipeRight {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 .factsEl {
   display: flex;
