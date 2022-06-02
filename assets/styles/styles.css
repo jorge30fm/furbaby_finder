@@ -35,6 +35,7 @@ img {
 }
 .button {
   background-image: linear-gradient(to bottom, var(--blue-jeans), var(--dodger-blue));
+  min-height: 1000;
   color: var(--white);
   border-radius: 15px;
   margin: 0% 5% 0% 5%;
@@ -78,9 +79,7 @@ img {
     transition: all .4s;
 }
 
-.btn-white::after {
-    background-color: #283959;
-}
+
 
 .btn:hover::after {
     transform: scaleX(1.4) scaleY(1.6);
@@ -175,9 +174,12 @@ img {
 .factsEl {
   display: flex;
   justify-content: center;
-  margin: 10px 35px
+  margin: 10px auto 50px auto;
+  padding: 0;
 }
-.fact { padding: 10px}
+.fact {
+  padding: 20px;
+}
 
 /* ID Selectors */
 #goHomepage {
