@@ -8,9 +8,9 @@ function goToIndex() {
   goHomepage.addEventListener("click", (window.location.href = "index.html"));
 }
 
-var requestURL ='https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?type=dog&page=2';
-var apiKey = 'pcOOphn8LZripwmmfhEXx8RXrETc8Tl98i0ur0E2qQoCgTY2TV';
-var secret ='RIRHL8ucrwQrfxzYOtVebcHMnLTCET7ZnBpwuTAn';
+
+var apiKey = 'yx6kmrR7AcI9lMtVntSNSOhIQLMC4srWHTMa525QEBdnLkUW4n';
+var secret ='zW1n1wtTBr5pN6G1DGSdV1nGFTzYHKBEQL6bL5zc';
 var token;
 var petPhoto = $("#petPhoto");
 var petName = $("#petName");
@@ -153,6 +153,7 @@ var deployPage = function(){
     </div>
       <div class="column is-8">
         <p class="myPetsName" id="petName` + count + `">NAME</p>
+        <i class="fa-solid fa-paw"></i>
         <p id='petAge`+ count + `'>AGE</p>
         <div id="petGender`+ count +`"></div>
         <p id="petBreed`+ count +`">BREED</p>
