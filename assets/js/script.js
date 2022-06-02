@@ -111,7 +111,7 @@ var displayInfo = function() {
     if (gender === "Female"){
       petGender.html('<i class="fa-solid fa-venus">')
     } else if (gender === "Male") {
-      petGender.html('< class="fa-solid fa-mars">')
+      petGender.html('<i class="fa-solid fa-mars">')
     }
     //add Breed
     var checkMixedBreed = petData.animals[count].breeds.mixed;
