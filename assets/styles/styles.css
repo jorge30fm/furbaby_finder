@@ -167,6 +167,7 @@ img {
 }
 .myPetsName {
   font-size: 2.5em;
+  display: inline;
 }
 
 .btn-container {
@@ -200,6 +201,7 @@ img {
   font-family: Dekko;
   font-size: 3em;
   margin-bottom: 0;
+  display: inline;
 }
 #petInfo {
   font-size: 1.2rem;
