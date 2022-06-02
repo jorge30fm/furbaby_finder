@@ -43,7 +43,7 @@ swipeLeft.click(function() {
 //when user swipes right,pet info is saved to local storage and next pet is displayed
 swipeRight.click(function(){
   if (localStorage.getItem('savedPets')==null) {
-  savedPes.push(petData.animals[count]);
+  savedPets.push(petData.animals[count]);
   localStorage.setItem("savedPets", JSON.stringify(savedPets));
   } else {
     savedPets = JSON.parse(localStorage.getItem("savedPets"));
