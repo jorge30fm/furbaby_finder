@@ -153,6 +153,7 @@ var deployPage = function(){
     </div>
       <div class="column is-8">
         <p class="myPetsName" id="petName` + count + `">NAME</p>
+        <i class="fa-solid fa-paw"></i>
         <p id='petAge`+ count + `'>AGE</p>
         <div id="petGender`+ count +`"></div>
         <p id="petBreed`+ count +`">BREED</p>

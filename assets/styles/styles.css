@@ -167,11 +167,8 @@ img {
 }
 .myPetsName {
   font-size: 2.5em;
-  display: inline;
 }
-.fa-paw {
-  display: inline;
-}
+
 .btn-container {
   display: flex;
   justify-content: center;
