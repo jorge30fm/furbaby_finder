@@ -1,6 +1,6 @@
 //  navigation button for going to mypets.html
 function goToMyPets() {
-  viewPets.addEventListener("click", (window.location.href = "myPets.html"));
+  viewPets.addEventListener("click", (window.location.href = "mypets.html"));
 }
 
 // navigation button for going back to homepage
