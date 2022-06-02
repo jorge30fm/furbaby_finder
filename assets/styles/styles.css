@@ -2,58 +2,147 @@
 /* root selector */
 *{
   font-family: Dekko;
-}
+  overflow: hidden;
+  --dodger-blue: #3398F4ff;
+  --light-sky-blue: #97D4FFff;
+  --blue-jeans: #4BA2F1ff;
+  --wheat: #FFE9C2ff;
+  --white: #FFFFFFff;
+  --nyanza: #E2F5CBff;
 /* universal selector */
-
+}
 /* element selectors */
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px 30px 0px 30px;
+  }
+h1 {
+  font-size: 1.4em;
+  color: white;
+  font-weight: bolder;
+  letter-spacing: .2em;
+}
+body {
+  background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, #283959 , 0%,#283959   100.2% );
+}
+figure {
+  border-radius: 20px;
+}
+img {
+  border-radius: 20px;
+}
+.button {
+  background-image: linear-gradient(to bottom, var(--blue-jeans), var(--dodger-blue));
+  color: var(--white);
+  border-radius: 15px;
+  margin: 0% 5% 0% 5%;
+}
 
+.btn:link,
+.btn:visited {
+    text-decoration: none;
+    padding:.5em .5em;
+    width: 100%;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: white;
+    color: #283959;
+}
+
+.btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: #283959;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
 /* class selectors  */
 
 .indexCard {
+  align-self: center;
   margin: 30px 35%;
   box-shadow: 2px 2px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #283959;
-  background-color: #f8fbff;
+  border-radius: 40px;
+  padding-bottom: 0;
 }
-.card-image,
-.card,
 .image {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 5px 15px 20px 15px;
+  padding: 5px 15px 0px 15px;
   border-radius: 5px;
+
 }
-.content,
-.media-content {
-  text-align: center;
-  margin: 5px;
+.card-image {
+  padding-bottom: 20px;
 }
 
+
+.media {
+  margin-bottom: 0;
+}
+.media-content {
+  text-align: center;
+}
 .title {
   font-size: x-large;
   color: #283959;
 }
-
-#description {
-  margin: 0 0 20px 0;
-}
 .petlink {
   margin-bottom: 20px;
+  padding: 0 5% 0 5%;
 }
-#petName {
-  text-transform: uppercase;
-  font-family: Dekko;
-}
-/* ID Selectors */
-#viewPets,
-#goHomepage {
-  float: right;
-}
-
-/* media  */
-
-/*view my pets styling*/
 .viewSavedCard {
   margin: 0;
   margin-right: 0;
@@ -63,12 +152,13 @@
   margin: 2% 5% ;
   width: 80%;
   border: solid 1px #283959;
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
   padding-right: 5%;
   background-color: #f8fbff;
   box-shadow: 2px 2px 6px;
 }
+
 .myPetsPhoto {
   padding: auto;
   display: flex;
@@ -78,3 +168,34 @@
 .myPetsName {
   font-size: 2.5em;
 }
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+.factsEl {
+  display: flex;
+  justify-content: center;
+  margin: 10px 35px
+}
+.fact { padding: 10px}
+
+/* ID Selectors */
+#goHomepage {
+  float: right;
+}
+#description {
+  margin: 0 0 20px 0;
+  padding: 0 5% 0 5%;
+}
+#petName {
+  text-transform: uppercase;
+  font-family: Dekko;
+  font-size: 3em;
+  margin-bottom: 0;
+}
+#petInfo {
+  font-size: 1.2rem;
+}
+/* media  */
+
+
