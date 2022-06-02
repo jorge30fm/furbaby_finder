@@ -63,9 +63,11 @@
   margin: 2% 5% ;
   width: 80%;
   border: solid 1px #283959;
-  border-radius: 30px;
+  border-radius: 5px;
   display: flex;
   padding-right: 5%;
+  background-color: #f8fbff;
+  box-shadow: 2px 2px 6px;
 }
 .myPetsPhoto {
   padding: auto;
