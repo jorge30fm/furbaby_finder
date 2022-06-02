@@ -23,14 +23,15 @@ var swipeRight = $("#swipeRight");
 var petDescription = $("#description");
 var petURL = $("#petURL")
 var count = 0;
-var petData;
+var petData = {}
 var savedPets = [];
-
+var DogFacts = {}
 
 
 //when user swipes left, next pet is displayed
 swipeLeft.click(function() {
     count++;
+    console.log('click')
     if (count < 100){
     displayInfo();
     }
@@ -80,7 +81,7 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
     const token = data.access_token;
     const authorization = 'Bearer ' + token;
 
-    fetch('https://api.petfinder.com/v2/animals?type=dog&limit=100', {
+    fetch('https://api.petfinder.com/v2/animals?type=dog&limit=100&sort=random', {
       headers: { Authorization: authorization, 'Content-Type': 'application/json' },
     })
       .then(function (response) {
@@ -95,7 +96,7 @@ fetch('https://api.petfinder.com/v2/oauth2/token', {
 
 var displayInfo = function() {
     //add pet Image
-    var imageSrc = petData.animals[count].primary_photo_cropped.medium;
+    var imageSrc = petData.animals[count].primary_photo_cropped.small;
     var imageEl = $('<img src="'+ imageSrc +'">')
     petPhoto.html(imageEl)
 
@@ -222,9 +223,24 @@ var deployPage = function(){
 }
 
 deployPage()
+var factIndex = 0;
 
+var showFact = function() {
+  $('.fact').text(DogFacts.facts[factIndex])
 
+  if (factIndex < 435) {
+    factIndex++;
+  } else {
+    factIndex = 0;
+  }
+}
 
-
-
+fetch('https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all')
+.then(function(response){
+  return response.json()
+})
+.then (function(dogFacts){
+  DogFacts = dogFacts;
+  setInterval(showFact, 5000)
+})
 
