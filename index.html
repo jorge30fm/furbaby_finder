@@ -12,18 +12,17 @@
   </head>
   <body id="index">
     <header>
-      <h1>Furbaby Finder</h1>
+      <a href="./index.html"><h1>Furbaby Finder</h1></a>
       <div id="viewPets">
           <div class="text-box">
             <a href="#" class="btn  btn-white btn-        animate float-right" onclick="goToMyPets()"
             id="viewPets">Saved Pets</a>
           </div>
       </div>
-
     </header>
-
-    <div class="columns bg is-mobile is-centered" >
-      <div class="card indexCard column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen">
+    <main>
+      <div class="columns bg is-mobile is-centered" >
+      <div class="card indexCard column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen" data-display="display-off" id="petDisplay">
         <div class="card-image mt-5">
           <figure class="photo" id="petPhoto">
             <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -51,16 +50,89 @@
             <p class="petlink">Learn more about this pet <a id="petURL">here</a></p>
           </div>
           <div class="container btn-container">
-            <button class="button " id="swipeLeft">Next</button>
-            <button class="button is-primary" id="swipeRight"><i class="fa-solid fa-heart"></i></button>
+            <button class="button petButton" id="swipeLeft">Next</button>
+            <button class="button petButton is-primary" id="swipeRight"><i class="fa-solid fa-heart"></i></button>
           </div>
         </div>
       </div>
-    </div>
-    <div class='factsEl cardItem'>
-      <p class="fact"></p>
+      <div class=" card indexCard column is-centered is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen" data-display="display-on" id="welcomeDisplay">
+        <form class="heroCard">
+          <div class="heroImg">
+            <img src="./assets/images/pngwing.com.png">
+          </div>
+          <div class='heroForm'>
+            <div id="welcometext">
+              <h2 class="welcome">WELCOME TO</h2>
+              <h2 class="welcome" id="webtitle">FURBABY FINDER</h2>
+              <h2 id="subtitle">Your pet is waiting for you</h2>
+              <h2 id="form-prompt">Describe your ideal friend: </h2>
+
+            </div>
+
+             <div class="container petForm">
+              <form class="form">
+                <div class="form__group select is-rounded is-info is-small">
+                  <select id="petType" data-dropdown>
+                    <option value="">Select type of pet</option>
+                    <option value="dog">Dog<span></span></option>
+                    <option value="cat">Cat</option>
+                    <option value="rabbit">Rabbit</option>
+                    <option value="horse">Horse</option>
+                    <option value="bird">Bird</option>
+                    <option value="barnyard">Barnyard</option>
+                    <option value="small-furry">Small & Furry</option>
+                    <option value="scales-fins-others,">Scales, Fins & Others</option>
+                  </select>
+                </div>
+                <p class="Err" id="petTypeErr"></p>
+                <div class="control" id="selectGender">
+                  <label class="radio">
+                    <input type="radio" name="genderS" value="Male" id="male">
+                    Male
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="genderS" value="Female" id="female">
+                    Female
+                  </label>
+                </div>
+                <p class="Err" id="genderErr"></p>
+                <div class="form__group select is-rounded is-info is-small">
+                  <select id="distance" data-dropdown>
+                    <option value="500">500 miles</option>
+                    <option value="100">100 miles</option>
+                    <option value="50">50 miles</option>
+                    <option value="25">25 miles</option>
+                    <option value="10">10 miles</option>
+                </select>
+                </div>
+                <p>From</p>
+                <input class="input is-rounded is-info is-small" type="text" placeholder="Zip Code" id="zipcode">
+                <p class="Err" id="zipErr"></p>
+
+                <input type="submit" class="button is-success is-rounded" id="submit" value="Find my Pet!"></input>
+                <div id="loading"></div>
+          </div>
+
+        </form>
+      </div>
+      </div>
+    </main>
+    <footer class='factsEl footeR fact'>
+    </footer>
+    <div id="errorModal" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <p class="Err">No pets found with the selected criteria. Make sure the entered Zip Code is valid, or widen your search radius</p>
+          <!-- Your content -->
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
+
 </html>
