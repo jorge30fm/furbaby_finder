@@ -8,6 +8,14 @@ function goToIndex() {
   goHomepage.addEventListener("click", (window.location.href = "index.html"));
 }
 
+fetch('https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all')
+.then(function(response){
+  return response.json()
+})
+.then (function(dogFacts){
+  DogFacts = dogFacts;
+  setInterval(showFact, 5000)
+})
 
 var apiKey = 'yx6kmrR7AcI9lMtVntSNSOhIQLMC4srWHTMa525QEBdnLkUW4n';
 var secret ='zW1n1wtTBr5pN6G1DGSdV1nGFTzYHKBEQL6bL5zc';
@@ -26,12 +34,17 @@ var count = 0;
 var petData = {}
 var savedPets = [];
 var DogFacts = {}
+var latitude;
+var longitude;
+var petTypeForm;
+var petGenderForm;
+var distanceForm;
+var zipForm;
 
 
 //when user swipes left, next pet is displayed
 swipeLeft.click(function() {
     count++;
-    console.log('click')
     if (count < 100){
     displayInfo();
     }
@@ -62,39 +75,49 @@ swipeRight.click(function(){
 })
 
 var  fetchPetData = function(){
-fetch('https://api.petfinder.com/v2/oauth2/token', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-  body: JSON.stringify({
-    grant_type: 'client_credentials',
-    client_id: apiKey,
-    client_secret: secret,
-  }),
-})
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    const token = data.access_token;
-    const authorization = 'Bearer ' + token;
-
-    fetch('https://api.petfinder.com/v2/animals?type=dog&limit=100&sort=random', {
-      headers: { Authorization: authorization, 'Content-Type': 'application/json' },
+    fetch('https://api.petfinder.com/v2/oauth2/token', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: apiKey,
+      client_secret: secret,
+      }),
     })
+    .then(function (response) {
+    return response.json();
+    })
+    .then(function (data) {
+      const token = data.access_token;
+      const authorization = 'Bearer ' + token;
+      console.log('https://api.petfinder.com/v2/animals?type='+ petTypeForm + '&gender=' + petGenderForm + '&distance=' + distanceForm + '&location=' + zipForm + '&limit=100&sort=random')
+      fetch('https://api.petfinder.com/v2/animals?type='+ petTypeForm + '&gender=' + petGenderForm + '&distance=' + distanceForm + '&location=' + zipForm + '&limit=100&sort=random', {
+      headers: { Authorization: authorization, 'Content-Type': 'application/json' }
+      })
       .then(function (response) {
-        return response.json();
-      })
-      .then(function (doggieData) {
-        petData = doggieData;
-        displayInfo()
-      })
-  });
-}
+      if(response.ok) {
+        return response.json()
+        .then(function (doggieData) {
+          if(doggieData.animals.length === 0){errorModal()}
+          else{
+          petData = doggieData;
+          displayInfo()
+          }
+        })
+      }
+      else {
+        errorModal()
+      }
+    })
+  })
+};
 
 var displayInfo = function() {
+  $("#welcomeDisplay").attr("data-display", "display-off");
+  $("#petDisplay").attr("data-display", "display-on");
     //add pet Image
     var imageSrc = petData.animals[count].primary_photo_cropped.small;
     var imageEl = $('<img src="'+ imageSrc +'">')
@@ -139,10 +162,7 @@ var displayInfo = function() {
 
 var deployPage = function(){
   var body =$('body').attr('id')
-  if (body === 'index') {
-      fetchPetData()
-  }
-  else if (body ==='myPets') {
+  if (body ==='myPets') {
     var savedList = JSON.parse(localStorage.getItem('savedPets'));
     for (count = 0; count < savedList.length; count++) {
       var card = ` <div class="card cardItem" id='card` + count + `'>
@@ -162,6 +182,12 @@ var deployPage = function(){
         DESCRIPTION
         </p>
         <p class="petlink">Read more <a id="petURL`+ count +`">here</a></p>
+        <button id="`+ count +`" class="button remove is-danger is-outlined">
+        <span>Delete</span>
+        <span class="icon is-small">
+          <i class="fas fa-times"></i>
+        </span>
+      </button>
       </div>
       </div>`;
     $("#displaySaved").append(card);
@@ -178,7 +204,10 @@ var deployPage = function(){
       var petDescription = $("#description"+ count);
       var petURL = $("#petURL"+ count)
 
+      if (savedList[count].primary_photo_cropped){
       var imageSrc = savedList[count].primary_photo_cropped.small;
+
+
       var imageEl = $('<img src="'+ imageSrc +'">')
       petPhoto.html(imageEl)
 
@@ -217,7 +246,10 @@ var deployPage = function(){
       // add url link
       var url = savedList[count].url;
       petURL.attr("href", url)
+    } else {
+      count++;
     }
+  }
     displaySavedPets()
     }
   }
@@ -236,12 +268,59 @@ var showFact = function() {
   }
 }
 
-fetch('https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all')
-.then(function(response){
-  return response.json()
-})
-.then (function(dogFacts){
-  DogFacts = dogFacts;
-  setInterval(showFact, 5000)
+
+
+//on submit, check if user added input and store input in variables.
+$("#submit").on('click', function(event){
+  $('.form').submit()
+  event.preventDefault();
+  $("#loading").html('<div class="lds-circle"><div></div></div>')
+  if($("#petType").val()) {
+  petTypeForm = $("#petType").val();
+  } else {
+    $("#petTypeErr").text("Please select what pet you're looking for.")
+  }
+  if (document.querySelector("#male").checked) {
+  petGenderForm = 'male';
+  console.log('checked')
+  } else if( document.querySelector("#female").checked){
+    petGenderForm = 'female';
+  }
+  else {
+    $("#genderErr").text("Please choose your desired pet's gender.")
+  }
+  distanceForm =$("#distance").val();
+  if (zipCode($("#zipcode").val())){
+    zipForm = $("#zipcode").val()
+  } else {
+    $("#zipErr").text("Please enter a valid zip code")
+  }
+  if (petTypeForm && petGenderForm && distanceForm && zipForm) {
+    fetchPetData()
+  }
 })
 
+//check if zip code is a valid 5 digit zip code
+function zipCode(str){
+  var re = /^\d{5}$/;
+
+  return re.test(str);
+  }
+
+function errorModal() {
+    $("#errorModal").addClass("is-active")
+    $(".modal-close").click(function(){
+      $("#errorModal").remove(".is-active")
+    })
+    $("#loading").html('')
+}
+
+$(document).on('click', '.remove', function(event){
+ var index = this.id;
+ console.log('remove')
+ savedPets = JSON.parse(localStorage.getItem('savedPets'));
+ savedPets.splice(index, 1);
+ localStorage.setItem("savedPets", JSON.stringify(savedPets));
+  $("#displaySaved").html('');
+  deployPage()
+})
