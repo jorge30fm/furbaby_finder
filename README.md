@@ -18,7 +18,7 @@ https://github.com/glo6al/project-1-tm-9
 
 ## Deployed Application URL
 
-https://glo6al.github.io/project-1-tm-9/
+https://jorge30fm.github.io/furbaby_finder/
 
 ## Contributors
 
